@@ -73,10 +73,10 @@ The server files are downloaded automatically on first start and updated on ever
 
 Use the `GAME_WORLD` variable to choose the map:
 
-| Value           | Map                                     |
-|-----------------|-----------------------------------------|
-| `Level01_Main`  | Cloud Mist Forest (base game, default)  |
-| `Level01_Main`  | Shifting Sands (DLC, April 10 2026)     |
+| Value               | Map                                    |
+|---------------------|----------------------------------------|
+| `Level01_Main`      | Cloud Mist Forest (base game, default) |
+| `DLC_Level01_Main`  | Shifting Sands (DLC, April 10 2026)    |
 
 ### Shifting Sands DLC (v1.0)
 
