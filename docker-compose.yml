@@ -1,16 +1,42 @@
 ---
+# For a single-map server, remove the soulmask-map2 service and rename
+# .env.map1 to .env (or point env_file at whichever file you prefer).
+#
+# For cross-map play (Cloud Mist Forest <-> Shifting Sands), run both services.
+# See README.md § Cross-Map Setup for step-by-step instructions.
+
 services:
-  soulmask:
+
+  # ── Main server: Cloud Mist Forest ─────────────────────────────────────────
+  soulmask-map1:
     image: indifferentbroccoli/soulmask-server-docker
     platform: linux/amd64
     restart: unless-stopped
-    container_name: soulmask
+    container_name: soulmask-map1
     stop_grace_period: 60s
     ports:
       - 8777:8777/udp
       - 27015:27015/udp
       - 18888:18888/tcp
     env_file:
-      - .env
+      - .env.map1
     volumes:
-      - ./server-files:/home/steam/server-files
+      - ./server-files-map1:/home/steam/server-files
+
+  # ── Child server: Shifting Sands (DLC) ─────────────────────────────────────
+  soulmask-map2:
+    image: indifferentbroccoli/soulmask-server-docker
+    platform: linux/amd64
+    restart: unless-stopped
+    container_name: soulmask-map2
+    stop_grace_period: 60s
+    ports:
+      - 8778:8778/udp
+      - 27016:27016/udp
+      - 18889:18889/tcp
+    env_file:
+      - .env.map2
+    volumes:
+      - ./server-files-map2:/home/steam/server-files
+    depends_on:
+      - soulmask-map1
